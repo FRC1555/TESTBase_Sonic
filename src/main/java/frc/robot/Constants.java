@@ -77,7 +77,7 @@ public final class Constants {
   }
 
   public static final class OIConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int kDriverControllerPort = 1; // The first controller plugged in defaults to port one, so for ease of use I'm setting this value to 1 as well.
     public static final double kDriveDeadband = 0.05;
   }
 
