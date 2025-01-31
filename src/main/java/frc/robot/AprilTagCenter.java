@@ -19,27 +19,21 @@ public class AprilTagCenter {
     public void keepDistanceFromAprilTag() {
         if (!limelight.hasValidTargets()) {
             drive.stop();
-            System.out.println("[AprilTagCenter] No valid targets found.");
             return;
         }
     
         double[] botPose = limelight.getBotPose();
         double currentDistance = botPose[2] * 39.37; // Convert meters to inches
         double distanceError = TARGET_DISTANCE_INCHES - currentDistance;
-        double speedAdjustment = SPEED_KP * distanceError * 0.02; // Reduce speed to 20%
+        double speedAdjustment = SPEED_KP * distanceError * 0.2; // Reduce speed to 20%
     
         if (Math.abs(distanceError) < SPEED_DEADBAND) {
             speedAdjustment = 0; // Avoid oscillation
         }
     
         double xOffset = limelight.getXOffset();
-        double turnAdjustment = TURN_KP * xOffset * 0.02; // Reduce turn speed to 20%
-    
-        System.out.println("[AprilTagCenter] Distance: " + currentDistance + 
-                           " Error: " + distanceError + 
-                           " Speed Adj: " + speedAdjustment + 
-                           " Turn Adj: " + turnAdjustment);
+        double turnAdjustment = TURN_KP * xOffset * 0.2; // Reduce turn speed to 20%
     
         drive.drive(speedAdjustment, 0, turnAdjustment, true);
-    }
+    }       
 }    
