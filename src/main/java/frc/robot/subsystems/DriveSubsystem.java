@@ -74,6 +74,16 @@ public class DriveSubsystem extends SubsystemBase {
         });
   }
 
+  // Stops the swerve modules entirely, did this to fix AprilTagCenter.java
+  public void stop() {
+    setModuleStates(new SwerveModuleState[] {
+        new SwerveModuleState(0, new Rotation2d()),
+        new SwerveModuleState(0, new Rotation2d()),
+        new SwerveModuleState(0, new Rotation2d()),
+        new SwerveModuleState(0, new Rotation2d())
+    });
+  }
+
   /**
    * Returns the currently-estimated pose of the robot.
    *

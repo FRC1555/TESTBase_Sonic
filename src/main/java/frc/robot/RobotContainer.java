@@ -34,6 +34,9 @@ import java.util.List;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final LimelightInterface limelight = new LimelightInterface(); // Create Limelight instance
+  private final AprilTagCenter c_TagCenter = new AprilTagCenter(m_robotDrive, limelight); // Pass it correctly
+  
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -71,6 +74,10 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kR1.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
+            m_robotDrive));
+    new JoystickButton(m_driverController, Button.kL1.value)
+        .whileTrue(new RunCommand(
+            () -> c_TagCenter.keepDistanceFromAprilTag(),
             m_robotDrive));
   }
 
