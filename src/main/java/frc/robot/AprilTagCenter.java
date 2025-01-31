@@ -26,14 +26,14 @@ public class AprilTagCenter {
         double[] botPose = limelight.getBotPose();
         double currentDistance = botPose[2] * 39.37; // Convert meters to inches
         double distanceError = TARGET_DISTANCE_INCHES - currentDistance;
-        double speedAdjustment = SPEED_KP * distanceError * 0.2; // Reduce speed to 20%
+        double speedAdjustment = SPEED_KP * distanceError * 0.02; // Reduce speed to 20%
     
         if (Math.abs(distanceError) < SPEED_DEADBAND) {
             speedAdjustment = 0; // Avoid oscillation
         }
     
         double xOffset = limelight.getXOffset();
-        double turnAdjustment = TURN_KP * xOffset * 0.2; // Reduce turn speed to 20%
+        double turnAdjustment = TURN_KP * xOffset * 0.02; // Reduce turn speed to 20%
     
         System.out.println("[AprilTagCenter] Distance: " + currentDistance + 
                            " Error: " + distanceError + 
