@@ -72,7 +72,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(m_driverController, Button.kR1.value)
-        .onTrue(new RunCommand(
+        .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
     new JoystickButton(m_driverController, Button.kL1.value)
