@@ -3,7 +3,7 @@ package frc.robot;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class AprilTagCenter {
-    private static final double TARGET_DISTANCE_INCHES = 48.0;
+    private static final double TARGET_DISTANCE_INCHES = 120.0;
     private static final double SPEED_KP = 0.05; // Proportional control for speed
     private static final double TURN_KP = 0.01; // Proportional control for turning
     private static final double SPEED_DEADBAND = 0.05;
@@ -38,6 +38,7 @@ public class AprilTagCenter {
         double turnAdjustment = TURN_KP * yOffset * 0.2; // Reduce turn speed to 20%
     
         drive.drive(speedAdjustment, strafeAdjustment, turnAdjustment, false);
+        System.out.println(distanceError);
     }
     
 }    
