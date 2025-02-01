@@ -23,7 +23,7 @@ public class AprilTagCenter {
         }
     
         double[] botPose = limelight.getBotPose();
-        double currentDistance = botPose[2] * 39.37; // Convert meters to inches
+        double currentDistance = Math.abs(botPose[2]) * 39.37; // Changes metres to inches
         double distanceError = TARGET_DISTANCE_INCHES - currentDistance;
         double speedAdjustment = SPEED_KP * distanceError * 0.02; // Reduce speed to 2%
     
@@ -38,7 +38,7 @@ public class AprilTagCenter {
         double turnAdjustment = TURN_KP * yOffset * 0.2; // Reduce turn speed to 20%
     
         drive.drive(speedAdjustment, strafeAdjustment, turnAdjustment, false);
-        System.out.println(distanceError);
+        System.out.println(currentDistance);
     }
     
 }    
