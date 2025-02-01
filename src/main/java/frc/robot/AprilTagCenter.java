@@ -5,7 +5,7 @@ import frc.robot.subsystems.DriveSubsystem;
 public class AprilTagCenter {
     private static final double TARGET_DISTANCE_INCHES = 48.0;
     private static final double SPEED_KP = 0.05; // Proportional control for speed
-    private static final double TURN_KP = 0.02; // Proportional control for turning
+    private static final double TURN_KP = 0.01; // Proportional control for turning
     private static final double SPEED_DEADBAND = 0.05;
     
     private final DriveSubsystem drive;
@@ -32,12 +32,12 @@ public class AprilTagCenter {
         }
     
         double xOffset = limelight.getXOffset();
-        double turnAdjustment = TURN_KP * xOffset * 0.2; // Reduce turn speed to 20%
+        double strafeAdjustment = SPEED_KP * xOffset * 0.02; // Adjust strafe movement
     
         double yOffset = botPose[0] * 39.37; // Convert meters to inches for strafe
-        double strafeAdjustment = SPEED_KP * -yOffset * 0.02; // Adjust strafe movement
+        double turnAdjustment = TURN_KP * yOffset * 0.2; // Reduce turn speed to 20%
     
-        drive.drive(speedAdjustment, strafeAdjustment, turnAdjustment, true);
+        drive.drive(speedAdjustment, strafeAdjustment, turnAdjustment, false);
     }
     
 }    
