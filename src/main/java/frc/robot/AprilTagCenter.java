@@ -7,6 +7,7 @@ public class AprilTagCenter {
     private static final double SPEED_KP = 0.03; // Proportional control for speed
     private static final double TURN_KP = 0.05; // Proportional control for turning
     private static final double SPEED_DEADBAND = 0.05;
+    private static final double STRAFE_DEADBAND = 1;
     
     private final DriveSubsystem drive;
     private final LimelightInterface limelight;
@@ -35,6 +36,10 @@ public class AprilTagCenter {
         double xOffset = botPose[0] * 39.37; // Convert meters to inches for strafe
         double turnAdjustment = TURN_KP * turnOffset * 0.2; // Reduce turn speed to 20%
         double strafeAdjustment = SPEED_KP * xOffset * 0.1; // Adjust strafe movement
+
+        if (xOffset < STRAFE_DEADBAND) {
+            strafeAdjustment = 0;
+        }
     
         drive.drive(speedAdjustment, strafeAdjustment, turnAdjustment, false);
         System.out.println("distanceError: " + distanceError);
